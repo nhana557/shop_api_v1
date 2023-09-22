@@ -3,7 +3,7 @@ import createError from 'http-errors'
 import helmet from 'helmet'
 import cors from 'cors'
 import morgan from 'morgan'
-// import Router from './routes/api.js'
+import Router from './routes/api.js'
 
 const app = express();
 
@@ -15,7 +15,7 @@ app.use(cors({
 app.use(helmet())
 app.use(morgan('dev'))
 
-// app.use('/api/v1', Router)
+app.use('/api/v1', Router)
 app.use('/img', express.static('./src/upload'))
 
 
