@@ -1,9 +1,12 @@
 import express from 'express'
 import makeCallback from '../../lib/utils/handleCb.js';
-import { authController } from '../../controller/index.js'
+import { categoryController } from '../../controller/index.js'
 const router = express.Router()
 
 router
-    .post('/register', makeCallback(authController.signUp))
+    .get('/listAll', makeCallback(categoryController.getList))
+    .post('/add', makeCallback(categoryController.insert))
+    .put('/update/:id', makeCallback(categoryController.update))
+    .delete('/remove/:id', makeCallback(categoryController.remove))
 
 export default router;
