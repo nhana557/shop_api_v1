@@ -4,10 +4,7 @@ export default class CategoryService {
     }
 
     async create(input) {
-        const { rowCount } = await this.Model.insert(input)
-        if (!rowCount) return {
-            error: 'create category failed'
-        }
+        return await this.Model.insert(input)
     }
 
     async getList() {
