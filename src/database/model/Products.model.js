@@ -3,7 +3,7 @@ import db from '../connection.js'
 export default class ProductModel {
     async add({ id, name, stock, price, category_id, store_id, image, description }) {
         try {
-            const result = await db.query(`INSERT INTO products
+            return await db.query(`INSERT INTO products
             (id, name,  stock, price, category_id,  description, image, store_id)
             VALUES($1, $2, $3, $4, $5, $6, $7, $8)`,
                 [
@@ -18,14 +18,13 @@ export default class ProductModel {
                 ])
         } catch (error) {
             throw new Error(`Failed to insert product: ${error.message}`);
-
         }
     }
 
-    async update({ id, name, stock, price, category_id, image, description, merk }) {
+    async update({ id, name, stock, price, category_id, image, description }) {
         try {
             const result = await db.query(`UPDATE products SET name=$1, stock=$2, price=$3, image=$4 ,description=$5, 
-            category_id=$6, merk=$7  WHERE id=$8`,
+            category_id=$6  WHERE id=$7`,
                 [
                     name,
                     stock,
@@ -33,7 +32,6 @@ export default class ProductModel {
                     image,
                     description,
                     category_id,
-                    merk,
                     id,
                 ])
             return result
