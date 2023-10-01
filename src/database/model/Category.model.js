@@ -4,15 +4,12 @@ export default class CategoryModel {
     async add({
         id,
         name,
-        smallImage,
-        mediumImage,
-        image,
-        status
+        image
     }) {
         try {
             const result = await db.query(`
-            INSERT INTO categorys(id, name, smallImage, mediumImage, image, status) VALUES ($1, $2, $3,$4, $5, $6)
-            `, [id, name, smallImage, mediumImage, image, status])
+            INSERT INTO categorys(id, name, image) VALUES ($1, $2, $3)
+            `, [id, name, image])
             return result
         } catch (error) {
             throw new Error(`Failed to get cart items: ${error.message}`);
@@ -33,20 +30,14 @@ export default class CategoryModel {
     async update({
         id,
         name,
-        smallImage,
-        mediumImage,
-        image,
-        status
+        image
     }) {
         try {
             const result = await db.query(`
-                UPDATE categorys SET name=$1, smallImage=$2, mediumImage=$3, image=$4, status=$5 WHERE id=$6
+                UPDATE categorys SET name=$1, image=$2 WHERE id=$3
             `, [
                 name,
-                smallImage,
-                mediumImage,
                 image,
-                status,
                 id
             ])
             return result
